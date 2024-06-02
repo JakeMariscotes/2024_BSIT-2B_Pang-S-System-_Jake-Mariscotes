@@ -3,13 +3,12 @@ include_once('db.php');
 session_start();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en-US">
 
 <head>
 	<meta charset="UTF-8">
-	<title>Welcome User</title>
+	<title>Welcome Customer</title>
 	<style>
 		.barber_form_container {
 			padding: 20px;
@@ -141,7 +140,7 @@ session_start();
 					<div class="clearfix">
 
 						<div class="pull-left logo-box">
-							<div class="logo"><a href="index.html"><img src="images/ssb_small.png" alt="" title=""></a></div>
+							<div class="logo"><a href="index.php"><img src="images/ssb_small.png" alt="" title=""></a></div>
 						</div>
 
 						<div class="nav-outer clearfix">
@@ -253,8 +252,8 @@ session_start();
 			</div>
 		</section>
 		<!-- End Reserve Section -->
-		<div class="choose">Junior Barber</div>
-		<form method="post" action="c_appointment_process.php">
+	<div class="choose">Junior Barber</div>
+	<form method="post" action="c_appointment_process.php">
     <div class="barber_form_container">
         <div class="row mr-5 ml-5 mb-5">
             <?php
@@ -343,7 +342,7 @@ session_start();
     </div>
 
     <!-- Hidden fields for submitting the booking -->
-    <input type="hidden" name="user_id" id="user_id" value="1"> <!-- Replace with dynamic user ID -->
+    <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['user_info_id']; ?>"> <!-- Replace with dynamic user ID -->
     <input type="hidden" name="barber_id" id="barber_id">
     <input type="hidden" name="total_price" id="total_price">
     <input type="hidden" name="services" id="services">
@@ -516,7 +515,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <!-- Hidden fields for submitting the booking -->
-    <input type="hidden" name="user_id" id="user_id" value="1"> <!-- Replace with dynamic user ID -->
+    <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['user_info_id']; ?>"> <!-- Replace with dynamic user ID -->
     <input type="hidden" name="barber_id" id="barber_id">
     <input type="hidden" name="total_price" id="total_price">
     <input type="hidden" name="services" id="services">
@@ -689,7 +688,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <!-- Hidden fields for submitting the booking -->
-    <input type="hidden" name="user_id" id="user_id" value="1"> <!-- Replace with dynamic user ID -->
+    <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['user_info_id']; ?>"> <!-- Replace with dynamic user ID -->
     <input type="hidden" name="barber_id" id="barber_id">
     <input type="hidden" name="total_price" id="total_price">
     <input type="hidden" name="services" id="services">
@@ -938,8 +937,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-	<!-- Scroll To Top -->
-	<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-circle-up"></span></div>
+	
 
 	<script src="js/jquery.js"></script>
 	<script src="js/popper.min.js"></script>

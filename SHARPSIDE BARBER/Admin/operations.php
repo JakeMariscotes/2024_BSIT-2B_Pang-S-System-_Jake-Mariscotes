@@ -1,11 +1,11 @@
 <?php
 include_once('db.php');
 session_start();
+
 // Fetch the pricing data for each barber type
 $result_pricing_specialist = mysqli_query($conn, "SELECT * FROM services");
 $result_pricing_senior = mysqli_query($conn, "SELECT * FROM services");
 $result_pricing_junior = mysqli_query($conn, "SELECT * FROM services");
-
 ?>
 
 <!DOCTYPE html>
@@ -154,8 +154,8 @@ $result_pricing_junior = mysqli_query($conn, "SELECT * FROM services");
     </section>
     <!-- End of Services Section -->
 
-   <!-- Pricing Section -->
-   <section class="pricing_section" id="pricing" style="text-align: center; color: black;">
+    <!-- Pricing Section -->
+    <section class="pricing_section" id="pricing" style="text-align: center; color: black;">
     <h2>Pricing</h2>
     <div class="container-fluid"> <!-- Full-width container -->
         <!-- First Row: Two Tables Side by Side -->
@@ -261,9 +261,6 @@ $result_pricing_junior = mysqli_query($conn, "SELECT * FROM services");
 </section>
 <!-- End of Pricing Section -->
 
-
-
-
     <!-- Appointments Section -->
     <section class="appointments_section" id="appointments" style="text-align: center; color: white; background-image: url(images/background/8.jpg)">
         <h2>Appointments</h2>
@@ -276,13 +273,13 @@ $result_pricing_junior = mysqli_query($conn, "SELECT * FROM services");
                                 <tr class="bg-dark text-white">
                                     <td>Appointments</td>
                                     <td>Status</td>
-                                    <td>Remove</td>
+                                    <!-- Remove the "Remove" column -->
                                 </tr>
                                 <?php
                                 include('operations/appointments_process.php');
                                 // Loop through the appointment results
-                                while ($row = mysqli_fetch_assoc($result_appointments)) {
-                                ?>   
+                                while ($row = mysqli_fetch_assoc($resultAppointments)) {
+                                    ?>   
                                     <tr>   
                                         <td>
                                             <p>
@@ -292,17 +289,9 @@ $result_pricing_junior = mysqli_query($conn, "SELECT * FROM services");
                                             </p>
                                         </td> 
                                         <td><?php echo htmlspecialchars($row['status']); ?></td>
-                                        <td>
-                                            <!-- Form for remove button -->
-                                            <form method="post" action="operations/appointments_process.php">
-                                                <!-- Hidden input to store appointment ID -->
-                                                <input type="hidden" name="appointment_id" value="<?php echo $row['appointment_id']; ?>">
-                                                <!-- Remove button -->
-                                                <button type="submit" class="btn btn-danger" name="remove_appointment">Remove</button>
-                                            </form>
-                                        </td>
+                                        <!-- Remove the remove button and associated form -->
                                     </tr>
-                                <?php
+                                    <?php
                                 }
                                 ?>
                             </table>
@@ -314,26 +303,16 @@ $result_pricing_junior = mysqli_query($conn, "SELECT * FROM services");
     </section>
     <!-- End of Appointments Section -->
 
-    
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <div class="auto-container">
-            <div class="copyright" style="text-align: center">
-                <p class="copyright">© 2024 <strong>Sharpside Barber</strong> made by <strong>Pang S(System)</strong>.</p>
-            </div>
-        </div>
-    </footer>
 
-    <!-- Logout to-->
+    <!-- Logout Script -->
     <script>
-    document.getElementById('logout-link').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default link action
-        if (confirm('Are you sure you want to logout?')) {
-            window.location.href = '../visitor_home_page.php';
-        }
-    });
+        document.getElementById("logout-link").addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("logout-form").submit();
+        });
     </script>
-    <!-- end ng Logout script-->
-
+    <form id="logout-form" action="logout.php" method="POST" style="display: none;">
+        <input type="hidden" name="logout">
+    </form>
 </body>
 </html>

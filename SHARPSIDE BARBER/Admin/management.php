@@ -45,90 +45,87 @@ session_start();
     <!-- End of Page title Section -->
 
     <!-- Payment Section -->
-    <section class="payment_section" id="payment" style="text-align: center; color: black">
-        <h2><strong>Payments</strong></h2>
-        <div class="payment_table">
-            <div class="row mr-3 ml-3 mb-5">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <table class="table table-bordered text-center">
-                                <tr class="bg-dark text-white">
-                                    <td>Barber Name</td>
-                                    <td>G-cash Account Name</td>
-                                    <td>Reference Number</td>
-                                    <td>Amount</td>
-                                    <td>Date Added</td>
-                                    <td>End of Subscription</td>
-                                    <td>Confirm Payment</td>
-                                </tr>
-                                <?php include('management/payment_process.php'); ?>
-                                <?php while($row = mysqli_fetch_assoc($result_payment)) { ?>
-                                <tr>
-                                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                                        <input type="hidden" name="payment_id" value="<?php echo $row['payment_id']; ?>">
-                                        <td><?php echo $row['username']; ?></td>
-                                        <td><?php echo $row['account_name']; ?></td>
-                                        <td><?php echo $row['reference_no']; ?></td>
-                                        <td><?php echo $row['amount']; ?></td>
-                                        <td><?php echo $row['date_added']; ?></td>
-                                        <td><input type="text" name="sub_end" placeholder="End of Subscription" required/></td>
-                                        <td><button type="submit" name="confirm_payment" class="btn btn-primary">Confirm</button></td>
-                                    </form>
-                                </tr>
-                                <?php } ?>
-                            </table>
-                        </div>
+<section class="payment_section" id="payment" style="text-align: center; color: black">
+    <h2><strong>Payments</strong></h2>
+    <div class="payment_table">
+        <div class="row mr-3 ml-3 mb-5">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered text-center">
+                            <tr class="bg-dark text-white">
+                                <td>Barber Name</td>
+                                <td>G-cash Account Name</td>
+                                <td>Reference Number</td>
+                                <td>Amount</td>
+                                <td>Date Added</td>
+                                <td>Confirm Payment</td>
+                            </tr>
+                            <?php include('management/payment_process.php'); ?>
+                            <?php while($row = mysqli_fetch_assoc($result_payment)) { ?>
+                            <tr>
+                                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                                    <input type="hidden" name="payment_id" value="<?php echo $row['payment_id']; ?>">
+                                    <td><?php echo $row['username']; ?></td>
+                                    <td><?php echo $row['account_name']; ?></td>
+                                    <td><?php echo $row['reference_no']; ?></td>
+                                    <td><?php echo $row['amount']; ?></td>
+                                    <td><?php echo $row['date_added']; ?></td>
+                                    <td><button type="submit" name="confirm_payment" class="btn btn-primary">Confirm</button></td>
+                                </form>
+                            </tr>
+                            <?php } ?>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- End of Payment Section -->
+    </div>
+</section>
+
 
     <!-- Report Section -->
-    <section class="report_section" id="report" style="text-align: center; color: white; background-image: url(images/background/3.jpg)">
-        <h2><strong>Reports</strong></h2>
-        <div class="report_table">
-            <div class="row mr-3 ml-3 mb-5">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <table class="table table-bordered text-center">
-                                <tr class="bg-dark text-white">
-                                    <td>Barber ID</td>
-                                    <td>Barber Name</td>
-                                    <td>Contact Number</td>
-                                    <td>Email Address</td>
-                                    <td>End of Subscription</td>
-                                    <td>Actions</td>
+<section class="report_section" id="report" style="text-align: center; color: white; background-image: url(images/background/3.jpg)">
+    <h2><strong>Reports</strong></h2>
+    <div class="report_table">
+        <div class="row mr-3 ml-3 mb-5">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered text-center">
+                            <tr class="bg-dark text-white">
+                                <td>Barber ID</td>
+                                <td>Barber Name</td>
+                                <td>Contact Number</td>
+                                <td>Email Address</td>
+                                <td>End of Subscription</td>
+                                <td>Actions</td>
+                            </tr>
+                            <?php include('management/report_process.php'); ?>
+                            <?php while ($row = mysqli_fetch_assoc($result_report)) { ?>
+                                <tr>
+                                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>#report">
+                                        <input type="hidden" name="user_id" value="<?php echo $row['user_id']; ?>">
+                                        <input type="hidden" name="payment_id" value="<?php echo $row['payment_id']; ?>">
+                                        <td><?php echo $row['barber_id']; ?></td>
+                                        <td><?php echo $row['username']; ?></td>
+                                        <td><?php echo $row['contact_number']; ?></td>
+                                        <td><?php echo $row['email_address']; ?></td>
+                                        <td><?php echo $row['sub_end']; ?></td>
+                                        <td>
+                                            <button type="submit" name="remove_data" class="btn btn-warning">Remove</button>
+                                        </td>
+                                    </form>
                                 </tr>
-                                <?php include('management/report_process.php'); ?>
-                                <?php while ($row = mysqli_fetch_assoc($result_report)) { ?>
-                                    <tr>
-                                        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>#report">
-                                            <input type="hidden" name="user_id" value="<?php echo $row['user_id']; ?>">
-                                            <input type="hidden" name="payment_id" value="<?php echo $row['payment_id']; ?>">
-                                            <td><?php echo $row['barber_id']; ?></td>
-                                            <td><?php echo $row['username']; ?></td>
-                                            <td><?php echo $row['contact_number']; ?></td>
-                                            <td><?php echo $row['email_address']; ?></td>
-                                            <td><?php echo $row['sub_end']; ?></td>
-                                            <td>
-                                                <button type="submit" name="ban_barber" class="btn btn-danger">Ban Barber</button>
-                                                <button type="submit" name="remove_data" class="btn btn-warning">Remove</button>
-                                            </td>
-                                        </form>
-                                    </tr>
-                                <?php } ?>
-                            </table>
-                        </div>
+                            <?php } ?>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- End of Report Section -->
+    </div>
+</section>
+
 
 
 
